@@ -119,6 +119,23 @@ export const replace: {
 /**
  * @example
  * import * as S from '@effect/data/String'
+ * import { pipe } from '@effect/data/Function'
+ *
+ * assert.deepStrictEqual(pipe('abcbc', S.replaceAll('b', 'd')), 'adcdc')
+ *
+ * @since 1.0.0
+ */
+export const replaceAll: {
+  (searchValue: string | RegExp, replaceValue: string): (self: string) => string
+  (self: string, searchValue: string | RegExp, replaceValue: string): string
+} = dual(
+  3,
+  (self: string, searchValue: string | RegExp, replaceValue: string): string => self.replaceAll(searchValue, replaceValue)
+)
+
+/**
+ * @example
+ * import * as S from '@effect/data/String'
  *
  * assert.deepStrictEqual(S.trim(' a '), 'a')
  *
@@ -170,6 +187,7 @@ export const slice: {
  * assert.deepStrictEqual(S.isEmpty('a'), false)
  *
  * @since 1.0.0
+ * @category predicates
  */
 export const isEmpty = (self: string): self is "" => self.length === 0
 
@@ -177,6 +195,7 @@ export const isEmpty = (self: string): self is "" => self.length === 0
  * Test whether a `string` is non empty.
  *
  * @since 1.0.0
+ * @category predicates
  */
 export const isNonEmpty = (self: string): boolean => self.length > 0
 
@@ -191,6 +210,22 @@ export const isNonEmpty = (self: string): boolean => self.length > 0
  * @since 1.0.0
  */
 export const length = (self: string): number => self.length
+
+/**
+ * Test whether a `string` is lowercase.
+ *
+ * @since 1.0.0
+ * @category predicates
+ */
+export const isLowercase = (self: string): boolean => self === self.toLowerCase();
+
+/**
+ * Test whether a `string` is uppercase.
+ *
+ * @since 1.0.0
+ * @category predicates
+ */
+export const isUppercase = (self: string): boolean => self === self.toUpperCase();
 
 /**
  * @example
@@ -221,6 +256,7 @@ export const split: {
  * assert.deepStrictEqual(S.includes("abc", "d"), false)
  *
  * @since 1.0.0
+ * @category predicates
  */
 export const includes: {
   (searchString: string): (self: string) => boolean
@@ -238,6 +274,7 @@ export const includes: {
  * assert.deepStrictEqual(S.includesWithPosition("abc", "a", 1), false)
  *
  * @since 1.0.0
+ * @category predicates
  */
 export const includesWithPosition: {
   (searchString: string, position: number): (self: string) => boolean
@@ -259,6 +296,7 @@ export const includesWithPosition: {
  * assert.deepStrictEqual(S.startsWith("bc", "a"), false)
  *
  * @since 1.0.0
+ * @category predicates
  */
 export const startsWith: {
   (searchString: string): (self: string) => boolean
@@ -276,6 +314,7 @@ export const startsWith: {
  * assert.deepStrictEqual(S.startsWithPosition("bc", "a", 1), false)
  *
  * @since 1.0.0
+ * @category predicates
  */
 export const startsWithPosition: {
   (searchString: string, position: number): (self: string) => boolean
@@ -293,6 +332,7 @@ export const startsWithPosition: {
  * assert.deepStrictEqual(S.endsWith("ab", "c"), false)
  *
  * @since 1.0.0
+ * @category predicates
  */
 export const endsWith: {
   (searchString: string): (self: string) => boolean
@@ -307,6 +347,7 @@ export const endsWith: {
  * assert.deepStrictEqual(S.endsWithPosition("abc", "c", 2), false)
  *
  * @since 1.0.0
+ * @category predicates
  */
 export const endsWithPosition: {
   (searchString: string, position: number): (self: string) => boolean

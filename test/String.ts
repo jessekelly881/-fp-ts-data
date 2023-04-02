@@ -72,6 +72,10 @@ describe.concurrent("String", () => {
     expect(pipe("abc", S.replace("b", "d"))).toBe("adc")
   })
 
+  it("replaceAll", () => {
+    expect(pipe("abcbc", S.replace("b", "d"))).toBe("adcdc")
+  })
+
   it("split", () => {
     deepStrictEqual(pipe("abc", S.split("")), ["a", "b", "c"])
     deepStrictEqual(pipe("", S.split("")), [""])
